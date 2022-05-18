@@ -9,7 +9,7 @@ const int MAXN = 1e6+77;
 int n;
 int v[MAXN], lg2[MAXN], sp[MAXN][LOG+1];
 
-void query(int l, int r){
+int query(int l, int r){
 	int last = lg2[r-l+1];
 	return min(sp[l][last], sp[r-(1 << last)+1][last]);
 }
