@@ -68,7 +68,7 @@ class SegTree{
     }
 
     public:
-        void build(const vector<T> &_a){
+        void setup(const vector<T> &_a){
             a=_a;
             n=(int)(a.size());
             tree.assign(4*n, 0);
