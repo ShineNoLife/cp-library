@@ -43,11 +43,11 @@ class SegTree{
         if(tl == l && tr == r)
             return tree[v];
         push(v, tl, tr);
-        T tm = (tl+tr)/2;
+        int tm = (tl+tr)/2;
         T lq = query(v*2, tl, tm, l, min(tm, r)), rq = query(v*2+1, tm+1, tr, max(tm+1, l), r);
         return merge(lq, rq);
     }
-    void update(int v, int tl, int tr, int l, int r, T val){
+    void update(int v, int tl, int tr, int l, int r, int val){
         if(l > r)
             return;
         if(tl == l && tr == r){
@@ -61,7 +61,7 @@ class SegTree{
             return;
         }
         push(v, tl, tr);
-        T tm = (tl+tr)/2;
+        int tm = (tl+tr)/2;
         update(v*2, tl, tm, l, min(tm, r), val);
         update(v*2+1, tm+1, tr, max(tm+1, l), r, val);
         tree[v] = merge(tree[v*2], tree[v*2+1]);
@@ -79,7 +79,7 @@ class SegTree{
         T query(int l, int r){
             return query(1, 0, n-1, l, r);
         }
-        void update(int l, int r, T val){
+        void update(int l, int r, int val){
             update(1, 0, n-1, l, r, val);
         }
 };
