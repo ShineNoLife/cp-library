@@ -6,15 +6,14 @@ using namespace std;
 
 const int LOG = 19;
 const int MAXN = 1e6+77;
-int n;
-int v[MAXN], lg2[MAXN], sp[MAXN][LOG+1];
+int lg2[MAXN], sp[MAXN][LOG+1];
 
 int query(int l, int r){
 	int last = lg2[r-l+1];
 	return min(sp[l][last], sp[r-(1 << last)+1][last]);
 }
 
-void setup(){
+void setup(int n, vector<int> v){
 	lg2[0] = 0;
 	for(int i = 1; i < MAXN; i++)
 		lg2[i] = lg2[i/2]+1;
