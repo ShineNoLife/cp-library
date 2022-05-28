@@ -30,6 +30,8 @@ class BIT1D{
         }
         T query(int l, int r){
             l++; r++;
+            if(l > r)
+                return 0LL;
             return query(r)-query(l-1);
         }
         void update(int pos, long long val){
