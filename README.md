@@ -1,1 +1,1 @@
-# Repository for resources and good problems in competitive programming 
+# Repository for resources and solutions to problemsets in competitive programming 
