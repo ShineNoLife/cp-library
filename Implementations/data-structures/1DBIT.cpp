@@ -28,7 +28,7 @@ class BIT1D{
             n = (int)a.size();
             BIT.resize(n+1, 0);
             for(int i = 1; i <= n; i++){
-                BIT[i] = a[i-1];
+                BIT[i] += a[i-1];
                 if(i+(i&(-i)) <= n)
                     BIT[i+(i&(-i))]+=BIT[i];
             }
