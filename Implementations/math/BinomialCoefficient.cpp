@@ -18,7 +18,7 @@ long long binpow(long long a, long long b){
 
 void FactSetup(){
     fact[0] = 1;
-    for(int i = 2; i <= MAXN; i++)
+    for(int i = 1; i <= MAXN; i++)
         fact[i] = (fact[i-1]*i)%MOD;
 }
 
