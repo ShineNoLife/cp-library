@@ -1,6 +1,7 @@
 /*
 Description: Binary indexed tree in one dimension
 Time complexity: Query and single point update in O(logn)
+                 Initialization in O(n)
 */
 #include <bits/stdc++.h>
 using namespace std;
