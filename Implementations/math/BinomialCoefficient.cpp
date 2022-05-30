@@ -3,7 +3,7 @@ using namespace std;
 
 const int MOD = 1e9+7;
 const int MAXN = 1e6;
-int fact[MAXN+1];
+long long fact[MAXN+1];
 
 long long binpow(long long a, long long b){
     long long ans = 1;
