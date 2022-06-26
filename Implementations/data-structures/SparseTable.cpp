@@ -14,8 +14,8 @@ int query(int l, int r){
 }
 
 void setup(int n, vector<int> v){
-	lg2[0] = 0;
-	for(int i = 1; i < MAXN; i++)
+	lg2[1] = 0;
+	for(int i = 2; i < MAXN; i++)
 		lg2[i] = lg2[i/2]+1;
 	for(int i = 0; i < n; i++)
 		sp[i][0] = v[i];
