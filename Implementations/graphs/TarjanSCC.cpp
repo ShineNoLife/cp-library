@@ -20,7 +20,7 @@ void dfs(int u){
     }
     if(low[u] == ids[u]){
         while(stk.size()){
-            ll cur = stk.top();
+            int cur = stk.top();
             stk.pop();
             onstack[cur] = false;
             low[cur] = low[u];
