@@ -13,6 +13,7 @@ void dfs(int u){
     id++;
     for(int pos : adj[u]){
         if(!used[pos]){
+            used[pos] = true;
             int v = edge[pos].fi+edge[pos].se-u;
             if(num[v] == 0){
                 dfs(v);
