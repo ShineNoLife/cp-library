@@ -9,8 +9,8 @@ bool used[MAXN], bridge[MAXN];
 
 void dfs(int u){
     low[u] = 1e9;
-    num[u] = id;
     id++;
+    num[u] = id;
     for(int pos : adj[u]){
         if(!used[pos]){
             used[pos] = true;
