@@ -50,7 +50,8 @@ void Input(){
 int main(){
     Input();
     for(int i = 0; i < n; i++){
-        dfs(i);
+        if(!num[i])
+            dfs(i);
         if(cntChild[i] == 0 || (cntPar[i] == 0 && cntChild[i] <= 1))
             isPoint[i] = false;
     }
