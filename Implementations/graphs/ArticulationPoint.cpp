@@ -9,14 +9,15 @@ bool used[MAXN], isPoint[MAXN];
 
 void dfs(int u){
     low[u] = 1e9;
-    num[u] = id;
     id++;
+    num[u] = id;
     for(int pos : adj[u]){
         if(!used[pos]){
             used[pos] = true;
             int v = edge[pos].fi+edge[pos].se-u;
             if(num[v] == 0){
                 cntChild[u]++;
+                cntPar[v]++;
                 dfs(v);
                 low[u] = min(low[u], low[v]);
                 if(low[v] >= num[u])
@@ -33,6 +34,7 @@ void Input(){
     memset(num, 0, sizeof(num[0])*n);
     memset(low, 0, sizeof(low[0])*n);
     memset(cntChild, 0, sizeof(low[0])*n);
+    memset(cntPar, 0, sizeof(cntPar[0])*n);
     memset(isPoint, false, sizeof(isPoint[0])*n);
     memset(used, false, sizeof(used[0])*m);
     for(int i = 0; i < m; i++){
@@ -49,7 +51,7 @@ int main(){
     Input();
     for(int i = 0; i < n; i++){
         dfs(i);
-        if(cntChild[i] == 0)
+        if(cntChild[i] == 0 || (cntPar[i] == 0 && cntChild[i] <= 1))
             isPoint[i] = false;
     }
 }
