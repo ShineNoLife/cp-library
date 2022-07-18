@@ -46,7 +46,7 @@ void Input(){
 int main(){
     Input();
     for(int i = 0; i < n; i++){
-        if(num[i] == 0)
+        if(!num[i])
             dfs(i);
     }    
 }
