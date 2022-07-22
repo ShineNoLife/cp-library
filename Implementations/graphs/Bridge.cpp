@@ -29,10 +29,10 @@ void dfs(int u){
 
 void Input(){
     cin >> n >> m;
-    memset(num, 0, sizeof(num[0])*n);
-    memset(low, 0, sizeof(low[0])*n);
-    memset(bridge, false, sizeof(bridge[0])*m);
-    memset(used, false, sizeof(used[0])*m);
+    for(int i = 0; i < n; i++)
+        num[i] = low[i] = 0;
+    for(int i = 0; i < m; i++)
+        bridge[i] = used[i] = false;
     for(int i = 0; i < m; i++){
         ll u, v;
         cin >> u >> v;
