@@ -14,7 +14,7 @@ void sieve(int n){
     for(int i = 2; i <= n; i++){
         if(!composite[i])
             prime.push_back(i);
-        for(int j = 0; j < prime.size() && i*prime[j] <= n; j++){
+        for(int j = 0; j < prime.size() && 1ll*i*prime[j] <= n; j++){
             composite[i*prime[j]] = true;
             if(i%prime[j] == 0)
                 break;
