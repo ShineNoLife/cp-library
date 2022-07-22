@@ -26,13 +26,10 @@ void unite(int x, int y){
     int p1 = getPar(x), p2 = getPar(y);
     if(p1 == p2)
         return;
-    if(rnk[p1] > rnk[p2]){
+    if(rnk[p1] > rnk[p2])
         par[p2] = p1;
-    }
-    else{
-        par[p1] = p2;
-        rnk[p2] = max(rnk[p2], rnk[p1]+1);
-    }
+    else
+        par[p1] = p2, rnk[p2] = max(rnk[p2], rnk[p1]+1);
 }
 
 int main(){
