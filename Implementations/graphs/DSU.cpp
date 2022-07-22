@@ -15,15 +15,15 @@ void setup(int n){
     }
 }
 
-int getPar(int u){
+int root(int u){
     if(par[u] == u)
         return par[u];
-    par[u] = getPar(par[u]);
+    par[u] = root(par[u]);
     return par[u];
 }
 
 void unite(int x, int y){
-    int p1 = getPar(x), p2 = getPar(y);
+    int p1 = root(x), p2 = root(y);
     if(p1 == p2)
         return;
     if(rnk[p1] > rnk[p2])
