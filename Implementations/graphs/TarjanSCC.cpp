@@ -12,10 +12,8 @@ void dfs(int u){
     num[u] = low[u] = id++;
     stk.push(u);
     for(int i = 0; i < adj[u].size(); i++){
-        if(!num[adj[u][i]]){
+        if(!num[adj[u][i]])
             dfs(adj[u][i]);
-            low[u] = min(low[u], low[adj[u][i]]);
-        }
         if(onstack[adj[u][i]])
             low[u] = min(low[u], low[adj[u][i]]);
     }
@@ -24,6 +22,7 @@ void dfs(int u){
             int cur = stk.top();
             stk.pop();
             onstack[cur] = false;
+            low[cur] = low[u];
             if(cur == u)
                 break;
         }
