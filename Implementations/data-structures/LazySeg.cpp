@@ -8,7 +8,6 @@ class SegTree{
     typedef int T;
     int n;
     vector<T> a, tree, lazy;
-    vector<bool> marked;
     T merge(T a, T b){
         return max(a, b);
     }
@@ -17,18 +16,18 @@ class SegTree{
             tree[v] = a[tl];
         } else {
             int tm = (tl + tr) / 2; 
-            build(v*2, tl, tm);
-            build(v*2+1, tm+1, tr);
-            tree[v] = merge(tree[v*2], tree[v*2+1]);
+            build((v << 1), tl, tm);
+            build((v << 1)+1, tm+1, tr);
+            tree[v] = merge(tree[(v << 1)], tree[(v << 1)+1]);
         }
     }
     void push(int v, int tl, int tr){
         //update child first, push later
         /*addition update*/
-        tree[v*2] += lazy[v];
-        lazy[v*2] += lazy[v];
-        tree[v*2+1] += lazy[v];
-        lazy[v*2+1] += lazy[v];
+        tree[(v << 1)] += lazy[v];
+        lazy[(v << 1)] += lazy[v];
+        tree[(v << 1)+1] += lazy[v];
+        lazy[(v << 1)+1] += lazy[v];
         lazy[v] = 0;
         /*set value update*/
         // if(marked[v]){
@@ -43,8 +42,8 @@ class SegTree{
         if(tl == l && tr == r)
             return tree[v];
         push(v, tl, tr);
-        int tm = (tl+tr)/2;
-        T lq = query(v*2, tl, tm, l, min(tm, r)), rq = query(v*2+1, tm+1, tr, max(tm+1, l), r);
+        int tm = (tl+tr) >> 1;
+        T lq = query((v << 1), tl, tm, l, min(tm, r)), rq = query((v << 1)+1, tm+1, tr, max(tm+1, l), r);
         return merge(lq, rq);
     }
     void update(int v, int tl, int tr, int l, int r, long long val){
@@ -56,15 +55,15 @@ class SegTree{
             tree[v]+=val;
             lazy[v]+=val;
             /*set value update*/
-            //tree[v] = val;
-            //marked[v] = true;
+            // tree[v] = val;
+            // marked[v] = true;
             return;
         }
         push(v, tl, tr);
         int tm = (tl+tr)/2;
-        update(v*2, tl, tm, l, min(tm, r), val);
-        update(v*2+1, tm+1, tr, max(tm+1, l), r, val);
-        tree[v] = merge(tree[v*2], tree[v*2+1]);
+        update((v << 1), tl, tm, l, min(tm, r), val);
+        update((v << 1)+1, tm+1, tr, max(tm+1, l), r, val);
+        tree[v] = merge(tree[(v << 1)], tree[(v << 1)+1]);
     }
 
     public:
@@ -73,7 +72,6 @@ class SegTree{
             n=(int)(a.size());
             tree.assign(4*n, 0);
             lazy.assign(4*n, 0);
-            marked.assign(4*n, false);
             build(1, 0, n-1);
         }
         T query(int l, int r){
