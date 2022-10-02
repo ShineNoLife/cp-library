@@ -15,5 +15,4 @@ struct Matrix{
                     C[i][j]+=A[i][k]*B[k][j], C[i][j]%=MOD;
         return C;
     }
- 
 };
