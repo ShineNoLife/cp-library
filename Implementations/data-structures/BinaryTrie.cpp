@@ -21,8 +21,8 @@ void trieInsert(int x){
         if(p->child[bit] == NULL)
             p->child[bit] = new Node();
         p = p->child[bit];
-        p->cnt++;
     }
+    p->cnt++;
 }
 
 void trieErase(int x){
@@ -30,6 +30,6 @@ void trieErase(int x){
     for(int i = LIM; i >= 0; i--){
         int bit = ((x >> i) & 1);
         p = p->child[bit];
-        p->cnt--;
     }
+    p->cnt--;
 }
