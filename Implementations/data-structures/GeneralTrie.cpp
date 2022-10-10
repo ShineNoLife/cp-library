@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Trie{
+class trie{
     struct Node{
         Node* child[26];
         int cnt[26];
