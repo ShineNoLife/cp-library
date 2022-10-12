@@ -1,6 +1,7 @@
 class SegTree{
-    SegTree *left, *right;
-    int tl, tr, mid, lazy, val;
+public:
+    SegTree *left = NULL, *right = NULL;
+    ll tl, tr, mid, lazy, val;
 
     SegTree(int _tl, int _tr) : tl(_tl), tr(_tr), mid((_tl + _tr) >> 1), lazy(0), val(0) {
         if(tl == tr)
@@ -9,7 +10,7 @@ class SegTree{
         right = new SegTree(mid+1, tr);
     }
 
-    void Update(int l, int r, int x){
+    void Update(int l, int r, ll x){
         if(r < tl || tr < l)
             return;
         if(l <= tl && tr <= r){
@@ -21,15 +22,16 @@ class SegTree{
         Push();
         left->Update(l, r, x);
         right->Update(l, r, x);
-        val = left->val + right->val;
+        val = max(left->val, right->val);
     }
 
-    int Query(int l, int r){
+    ll Query(int l, int r){
         if(r < tl || tr < l)
             return 0;
         if(l <= tl && tr <= r)
             return val;
-        return val = left->Query(tl, tr) + right->Query(tl, tr);
+        Push();
+        return max(left->Query(l, r), right->Query(l, r));
     }
 
     void Push(){
