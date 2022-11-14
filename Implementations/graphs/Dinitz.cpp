@@ -74,6 +74,7 @@ struct MaxFlow{
                 pushed+=dF;
                 F-=dF;
                 e->updateFlow(u, dF);
+                if(F == 0) break;
             }
             if(e->capacity(u) != 0 && !blocked[v]) allBlocked = false;
         }
