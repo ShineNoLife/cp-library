@@ -1,16 +1,19 @@
 class SegTree{
 public:
     SegTree *left = NULL, *right = NULL;
-    ll tl, tr, mid, lazy, val;
-
-    SegTree(int _tl, int _tr) : tl(_tl), tr(_tr), mid((_tl + _tr) >> 1), lazy(0), val(0) {
-        if(tl == tr)
+    ll lazy, val;
+#define mid ((tl+tr) >> 1)
+    SegTree(int tl, int tr, vector<ll> &v) : lazy(0), val(0) {
+        if(tl == tr){
+            val = v[tl];
             return;
-        left = new SegTree(tl, mid);
-        right = new SegTree(mid+1, tr);
+        }
+        left = new SegTree(tl, mid, v);
+        right = new SegTree(mid+1, tr, v);
+        Pull();
     }
 
-    void Update(int l, int r, ll x){
+    void Update(int tl, int tr, int l, int r, ll x){
         if(r < tl || tr < l)
             return;
         if(l <= tl && tr <= r){
@@ -20,18 +23,18 @@ public:
         }
 
         Push();
-        left->Update(l, r, x);
-        right->Update(l, r, x);
-        val = max(left->val, right->val);
+        left->Update(tl, mid, l, r, x);
+        right->Update(mid+1, tr, l, r, x);
+        Pull();
     }
 
-    ll Query(int l, int r){
+    ll Query(int tl, int tr, int l, int r){
         if(r < tl || tr < l)
             return 0;
         if(l <= tl && tr <= r)
             return val;
         Push();
-        return max(left->Query(l, r), right->Query(l, r));
+        return min(left->Query(tl, mid, l, r), right->Query(mid+1, tr, l, r));
     }
 
     void Push(){
@@ -41,4 +44,9 @@ public:
         right->lazy += lazy;
         lazy = 0;
     }
+
+    void Pull(){
+        val = min(left->val, right->val);
+    }
+#undef mid
 };
