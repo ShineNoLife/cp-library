@@ -18,9 +18,9 @@ ll wn_poly(Point p, vector<Point> &poly){
                 return on_boundary;
         }
         else{
-            bool below = (poly[i].y < p.y);
+            bool below = (poly[i].y <= p.y);
             //different sides of horizontal ray
-            if (below != (poly[j].y < p.y)){
+            if (below != (poly[j].y <= p.y)){
                 ll orientation = ccw(p, poly[i], poly[j]);
 
                 if (orientation == 0) return on_boundary;
