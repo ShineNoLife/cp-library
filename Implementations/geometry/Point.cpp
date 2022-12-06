@@ -17,7 +17,8 @@ struct Point{
     Point operator / (T d) const { return Point(x / d, y / d); }
 
     T len2() const { return x * x + y * y; }
-    T len() const { return sqrt(len2()); }
+    db len() const { return sqrt((db)len2()); }
+    Point perp() { return Point(-y, x); }
     friend ostream& operator << (ostream &os, const Point &p) {
         return os << "(" << p.x << ", " << p.y << ")"; }
 };
