@@ -22,8 +22,8 @@ struct Point{
         return os << "(" << p.x << ", " << p.y << ")"; }
 };
 
-ll sgn(const ll &x) { return (x >= 0 ? (x ? 1 : 0) : -1); }
-
 ll ccw(const Point &P0, const Point &P1, const Point &P2){
     return (P1 - P0) ^ (P2 - P1);
 }
+
+ll sgn(const ll &x) { return (x >= 0 ? (x ? 1 : 0) : -1); }
