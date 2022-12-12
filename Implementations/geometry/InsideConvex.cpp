@@ -3,6 +3,7 @@ ll ccw(const Point &P0, const Point &P1, const Point &P2){
 }
 
 bool insideConvex(Point p, vector<Point> &poly){
+    // clock wise
     int n = sz(poly);
     if(ccw(poly[0], poly[1], p) >= 0) return false;
     if(ccw(poly[n - 1], poly[0], p) >= 0) return false;
