@@ -3,6 +3,7 @@ ll ccw(Point &p1, Point &p2, Point &p3){
 }
 
 ll wn_poly(Point p, vector<Point> &poly){
+    // counter clock wise
     const ll on_boundary = INF;
     ll wn = 0;
 
