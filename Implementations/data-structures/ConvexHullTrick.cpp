@@ -26,4 +26,7 @@ struct CHT : multiset<Line, less<>> {
         auto l = *lower_bound(x);
         return l.m * x + l.b;
     }
+    void reset(){
+        clear();
+    }
 };
