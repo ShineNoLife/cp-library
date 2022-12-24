@@ -12,26 +12,30 @@ long long dist[MAXN];
 bool visited[MAXN];
 
 void dijkstra(int n){
-    for(int i = 0; i < n; i++){
-        dist[i] = 1e18;
-        visited[i] = false;
-    }
-    priority_queue<pll, vector<pll>, greater<pll>> q;
-    dist[0] = 0;
-    q.push({0, 0});
-    while(q.size()){
-        int u = q.top().second;
-        q.pop();
-        if(!visited[u]){
-            visited[u] = true;
-            for(int i = 0; i < adj[u].size(); i++){
-                if(!visited[adj[u][i]] && dist[adj[u][i]] > dist[u]+cost[u][i]){
-                    dist[adj[u][i]] = dist[u]+cost[u][i];
-                    q.push({dist[adj[u][i]], adj[u][i]});
-                }
+    for(int i = 1; i <= n; i++)
+        dist[i] = INF, vis[i] = false;
+    
+    priority_queue<pll, vector<pll>, greater<pll>> pq;
+    dist[1] = 0;
+    pq.push({0, 1});
+
+    while(pq.size()){
+        int u = pq.top().S; pq.pop();
+
+        if(vis[u]) continue;
+
+        vis[u] = true;
+        for(int i = 0; i < adj[u].size(); i++){
+            int v = adj[u][i];
+            if(!vis[v] && dist[v] > dist[u] + cost[u][i]){
+                dist[v] = dist[u] + cost[u][i];
+                pq.push({dist[v], v});
             }
         }
+
     }
+
+    cout << dist[n] << '\n';
 }
 
 int main(){
