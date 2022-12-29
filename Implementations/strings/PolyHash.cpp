@@ -13,12 +13,12 @@ void precalc(){
     }
 }
   
-struct Hash{
+struct PolyHash{
     int val[nMOD];
   
-    Hash() { mem(val, 0); }
+    PolyHash() { mem(val, 0); }
  
-    Hash(const string &s) {
+    PolyHash(const string &s) {
         mem(val, 0);
  
         for(int j = 0; j < nMOD; j++)
@@ -26,7 +26,7 @@ struct Hash{
                 val[j] = (1ll * val[j] * BASE + s[i]) % modulo[j];
     }
  
-    bool operator < (const Hash &x) const {
+    bool operator < (const PolyHash &x) const {
         for(int i = 0; i < nMOD; i++) 
             if(val[i] != x.val[i]) 
                 return (val[i] < x.val[i]);
