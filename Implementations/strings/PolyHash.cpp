@@ -13,32 +13,38 @@ void precalc(){
     }
 }
   
-struct PolyHash{
-    vector<int> val[nMOD];
-    int n;
-  
-    PolyHash() { n = 0; }
- 
-    PolyHash(const string &s){
-        n = sz(s);
- 
-        for(int j = 0; j < nMOD; j++){
-            val[j].pb(s[0]);
-            for(int i = 0; i < n; i++)
-                val[j].pb((1ll * val[j][i - 1] * BASE + s[i]) % mods[j]);
-        }
-    }
- 
-    int Query(int j, int l, int r){
-        return (1ll * val[j][r] - (l - 1 >= 0 ? 1ll * val[j][l - 1] * pw[j][r - l + 1] : 0)
-             + 1ll * mods[j] * mods[j]) % mods[j];
-    }
+struct Hash{
+    int val[nMOD];
 
-    bool operator < (const PolyHash &x) const {
+    bool operator < (const Hash &x) const {
         for(int i = 0; i < nMOD; i++) 
             if(val[i] != x.val[i]) 
                 return (val[i] < x.val[i]);
  
         return false;
+    }
+};
+
+struct PolyHash{
+    vector<int> val[nMOD];
+  
+    PolyHash() { }
+ 
+    PolyHash(const string &s){
+        for(int j = 0; j < nMOD; j++){
+            val[j].pb(s[0]);
+            for(int i = 0; i < sz(s); i++)
+                val[j].pb((1ll * val[j][i - 1] * BASE + s[i]) % mods[j]);
+        }
+    }
+
+    Hash Query(int l, int r){
+        Hash res;
+
+        for(int j = 0; j < nMOD; j++)
+            res.val[j] = (1ll * val[j][r] - (l - 1 >= 0 ? 1ll * val[j][l - 1] * pw[j][r - l + 1] : 0)
+                 + 1ll * mods[j] * mods[j]) % mods[j];
+
+        return res;
     }
 };
