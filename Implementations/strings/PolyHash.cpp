@@ -33,7 +33,7 @@ struct PolyHash{
     PolyHash(const string &s){
         for(int j = 0; j < nMOD; j++){
             val[j].pb(s[0]);
-            for(int i = 0; i < sz(s); i++)
+            for(int i = 1; i < sz(s); i++)
                 val[j].pb((1ll * val[j][i - 1] * BASE + s[i]) % mods[j]);
         }
     }
