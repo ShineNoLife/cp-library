@@ -16,12 +16,22 @@ void precalc(){
 struct Hash{
     int val[nMOD];
 
+    Hash() { mem(val, 0); }
+
     bool operator < (const Hash &x) const {
         for(int i = 0; i < nMOD; i++) 
             if(val[i] != x.val[i]) 
                 return (val[i] < x.val[i]);
  
         return false;
+    }
+
+    bool operator == (const Hash &x) const {
+        for(int i = 0; i < nMOD; i++) 
+            if(val[i] != x.val[i]) 
+                return false;
+ 
+        return true;
     }
 };
 
@@ -39,6 +49,8 @@ struct PolyHash{
     }
 
     Hash Query(int l, int r){
+        if(l > r) return Hash();
+
         Hash res;
 
         for(int j = 0; j < nMOD; j++)
