@@ -65,7 +65,7 @@ struct MaxFlow{
     ll dDFS(int u, ll F){
         if(u == sink) return F;
         ll pushed = 0;
-        bool allBlocked = false;
+        bool allBlocked = true;
         for(Edge *e : adj[u]){
             int v = e->oth(u);
             if(!inDAG(u, v)) continue;
