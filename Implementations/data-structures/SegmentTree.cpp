@@ -3,11 +3,12 @@ public:
     SegTree *left = NULL, *right = NULL;
     ll lazy, val;
 #define mid ((tl+tr) >> 1)
-    SegTree(int tl, int tr, vector<ll> &v) : lazy(0), val(0) {
+    SegTree(int tl, int tr) : lazy(0), val(0) {
         if(tl == tr){
-            val = v[tl];
+            val = 0;
             return;
         }
+
         left = new SegTree(tl, mid, v);
         right = new SegTree(mid+1, tr, v);
         Pull();
@@ -16,6 +17,7 @@ public:
     void Update(int tl, int tr, int l, int r, ll x){
         if(r < tl || tr < l)
             return;
+
         if(l <= tl && tr <= r){
             val += x;
             lazy += x;
@@ -30,9 +32,11 @@ public:
 
     ll Query(int tl, int tr, int l, int r){
         if(r < tl || tr < l)
-            return 0;
+            return INF;
+
         if(l <= tl && tr <= r)
             return val;
+
         Push();
         return min(left->Query(tl, mid, l, r), right->Query(mid+1, tr, l, r));
     }
