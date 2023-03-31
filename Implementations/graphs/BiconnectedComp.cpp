@@ -28,6 +28,7 @@ void dfs(int u) {
         ll tmp;
         do {
             tmp = stk.top();
+            num[tmp] = scc;
             res[scc].pb(tmp);
             stk.pop();
 
