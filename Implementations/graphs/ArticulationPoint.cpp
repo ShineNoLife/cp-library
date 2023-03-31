@@ -49,7 +49,7 @@ int main(){
     for(int i = 0; i < n; i++){
         if(!num[i])
             dfs(i);
-        if(cnt[i] ==  <= 1)
+        if(cnt[i] <= 1)
             isPoint[i] = false;
     }
 }
