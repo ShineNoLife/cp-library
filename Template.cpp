@@ -20,7 +20,7 @@ using db = double;
 #define    mem(f,x)   memset(f , x , sizeof(f))
 #define __lcm(x, y)   (1LL * ((x) / __gcd((x), (y))) * (y))
 
-template<class T> bool maximize(T &a,const T &b){ return (a < b ? a = b,  1 : 0); }
+template<class T> bool maximize(T &a,const T &b){ return (a < b ? a = b, 1 : 0); }
 template<class T> bool minimize(T &a,const T &b){ return (a > b ? a = b, 1 : 0); }
 //--------------------
 #define PROBLEM "test"
