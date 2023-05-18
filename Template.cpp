@@ -18,7 +18,7 @@ using db = double;
 #define       sz(x)   (int)((x).size())
 #define      all(x)   (x).begin(), (x).end()
 #define     rall(x)   (x).rbegin(), (x).rend()
-#define    mem(f,x)   memset(f , x , sizeof(f))
+#define    mem(f, x)   memset(f, x, sizeof(f))
 
 template<class T> bool maximize(T &a,const T &b){ return (a < b ? a = b, 1 : 0); }
 template<class T> bool minimize(T &a,const T &b){ return (a > b ? a = b, 1 : 0); }
