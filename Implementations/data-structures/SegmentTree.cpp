@@ -1,3 +1,41 @@
+
+//optimized classic top down implementation
+void Update(int v, int tl, int tr, int l, int r, int x) {
+    if (l == tl && tr == r) {
+        seg[v] = x;
+        return;
+    }
+
+    int mid = (tl + tr) >> 1;
+
+    if(r <= mid)
+        Update(v << 1, tl, mid, l, r, x);
+    else if (l > mid)
+        Update(v << 1 | 1, mid + 1, tr, l, r, x);
+
+    seg[v] = max(seg[v << 1], seg[v << 1 | 1]);
+}
+
+int Query(int v, int tl, int tr, int l, int r) {
+    if(l == tl && tr == r)
+        return seg[v];
+
+    int mid = (tl + tr) >> 1;
+
+    if (r <= mid) 
+        return Query(v << 1, tl, mid, l, r);
+    else if(l > mid) 
+        return Query(v << 1 | 1, mid + 1, tr, l, r);
+    else 
+        return max(Query(v << 1, tl, mid, l, mid), Query(v << 1 | 1, mid + 1, tr, mid + 1, r));
+}
+
+
+
+
+
+
+//pointer-based implementation
 class SegTree {
 public:
     SegTree *left = NULL, *right = NULL;
