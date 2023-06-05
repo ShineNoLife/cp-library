@@ -38,9 +38,9 @@ const int ddx[4]{-1, 1, 1, -1}, ddy[4]{1, 1, -1, -1}; // UR DR DL UL
 
 void solve() {
 
-}
+}   
 
-int main(){
+int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0); cout.tie(0);
 
@@ -49,9 +49,12 @@ int main(){
         freopen(PROBLEM".out", "w", stdout);
     }
 
-    const bool MULTI_TEST = 0;
+    constexpr bool MULTI_TEST = 0;
     int t = 1;
     if(MULTI_TEST) cin >> t;
-    while(t--) 
+    while(t--)
         solve();
+
+    cerr << setprecision(3) << fixed;
+    cerr << "[" << 1.0 * clock() / CLOCKS_PER_SEC << "s]  ";
 }
