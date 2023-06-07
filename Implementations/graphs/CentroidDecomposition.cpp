@@ -26,8 +26,7 @@ ll findCentroid(int u, int p, int n) {
 }
 
 void centroidDecompose(int u, int p = -1) {
-    dfsSz(u, p);
-    ll cen = findCentroid(u, p, sub[u]);
+    ll cen = findCentroid(u, p, dfsSz(u, p));
 
     par[cen] = (p == -1 ? cen : p);
     vis[cen] = true;
