@@ -10,7 +10,7 @@ using str = string;
 using ld = long double;
 using db = double;
 
-//--------------------
+///--------------------------------
 
 #define           F   first
 #define           S   second
@@ -23,7 +23,7 @@ using db = double;
 template<class T> bool maximize(T &a,const T &b){ return (a < b ? a = b, 1 : 0); }
 template<class T> bool minimize(T &a,const T &b){ return (a > b ? a = b, 1 : 0); }
 
-//--------------------
+///--------------------------------
 
 #define PROBLEM "test"
 
@@ -34,11 +34,10 @@ const ld PI = acos(-1);
 const int dx[4]{0, 1, 0, -1}, dy[4]{1, 0, -1, 0}; // U R D L
 const int ddx[4]{-1, 1, 1, -1}, ddy[4]{1, 1, -1, -1}; // UR DR DL UL
 
-//-----------------[PROBLEM SOLUTION]-----------------//
+///--------------------------------
 
-void solve() {
-
-}   
+void precalc();
+void solve();
 
 int main() {
     ios_base::sync_with_stdio(0);
@@ -50,11 +49,18 @@ int main() {
     }
 
     constexpr bool MULTI_TEST = 0;
+
     int t = 1;
-    if(MULTI_TEST) cin >> t;
-    while(t--)
+    if (MULTI_TEST) cin >> t;
+    while (t--)
         solve();
 
-    cerr << setprecision(3) << fixed;
-    cerr << "[" << 1.0 * clock() / CLOCKS_PER_SEC << "s]  ";
+    // cerr << setprecision(3) << fixed;
+    // cerr << "[" << 1.0 * clock() / CLOCKS_PER_SEC << "s]  ";
+}
+
+///--------------------[PROBLEM SOLUTION]--------------------///
+
+void solve() {
+
 }
