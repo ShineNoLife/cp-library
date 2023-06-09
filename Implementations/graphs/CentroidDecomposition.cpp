@@ -3,11 +3,11 @@ vector<ll> adj[maxn];
 ll sub[maxn], par[maxn];
 bool vis[maxn];
 
-ll dfsSz(int u, int p) {
+int dfsSz(int u, int p) {
     sub[u] = 1;
 
     for (int v : adj[u]) {
-        if (v == p || vis[v]) continue;
+        if (vis[v] || v == p) continue;
 
         sub[u] += dfsSz(v, u);
     }
@@ -15,18 +15,18 @@ ll dfsSz(int u, int p) {
     return sub[u];
 }
 
-ll findCentroid(int u, int p, int n) {
+int findCentroid(int u, int p, int dsz) {
     for (int v : adj[u]) {
-        if (v == p || vis[v]) continue;
+        if (vis[v] || v == p) continue;
 
-        if (sub[v] > n / 2) return findCentroid(v, u, n);
+        if (sub[v] > (dsz >> 1)) return findCentroid(v, u, dsz);
     }
 
     return u;
 }
 
 void centroidDecompose(int u, int p = -1) {
-    ll cen = findCentroid(u, p, dfsSz(u, p));
+    int cen = findCentroid(u, p, dfsSz(u, p));
 
     par[cen] = (p == -1 ? cen : p);
     vis[cen] = true;
