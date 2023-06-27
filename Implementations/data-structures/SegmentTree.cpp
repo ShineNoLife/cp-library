@@ -36,64 +36,55 @@ int Query(int v, int tl, int tr, int l, int r) {
 
 
 //pointer-based implementation
-class SegTree {
-public:
-    SegTree *left = NULL, *right = NULL;
-    ll lazy, val;
-    
-#define mid ((tl+tr) >> 1)
-    SegTree(int tl, int tr) : lazy(0), val(0) {
-        if (tl == tr) {
-            val = 0;
-            return;
-        }
+struct segtree_t {
+#define mid ((tl + tr) >> 1)
+    segtree_t *left, *right;
+    ll val;
 
-        left = new SegTree(tl, mid, v);
-        right = new SegTree(mid + 1, tr, v);
+    segtree_t() { }
+
+    segtree_t(int tl, int tr) : val(-INF) {
+        if (tl == tr) return;
+
+        left = new segtree_t(tl, mid);
+        right = new segtree_t(mid + 1, tr); 
 
         Pull();
     }
 
     void Update(int tl, int tr, int l, int r, ll x) {
-        if(r < tl || tr < l)
-            return;
+        if (l > r) return;
 
-        if (l <= tl && tr <= r) {
-            val += x;
-            lazy += x;
+        if (tl == l && tr == r) {
+            maximize(val, x);
+
             return;
         }
 
-        Push();
-        left->Update(tl, mid, l, r, x);
-        right->Update(mid + 1, tr, l, r, x);
+        if (r <= mid) 
+            left->Update(tl, mid, l, r, x);
+        else if (l > mid)
+            right->Update(mid + 1, tr, l, r, x);
+
         Pull();
     }
 
     ll Query(int tl, int tr, int l, int r) {
-        if(r < tl || tr < l)
-            return INF;
+        if (l > r) return -INF;
 
-        if(l <= tl && tr <= r)
-            return val;
+        if (tl == l && tr == r) return val;
 
-        Push();
-
-        return min(left->Query(tl, mid, l, r), right->Query(mid + 1, tr, l, r));
-    }
-
-    void Push() {
-        left->val += lazy;
-        right->val += lazy;
-
-        left->lazy += lazy;
-        right->lazy += lazy;
-
-        lazy = 0;
+        if (r <= mid)
+            return left->Query(tl, mid, l, r);
+        else if (l > mid)
+            return right->Query(mid + 1, tr, l, r);
+        else 
+            return max(left->Query(tl, mid, l, mid), right->Query(mid + 1, tr, mid + 1, r));
     }
 
     void Pull() {
-        val = min(left->val, right->val);
+        val = max(left->val, right->val);
     }
+
 #undef mid
 };
