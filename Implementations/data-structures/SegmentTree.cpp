@@ -37,14 +37,15 @@ int Query(int v, int tl, int tr, int l, int r) {
 
 //pointer-based implementation
 struct segtree_t {
-#define mid ((tl + tr) >> 1)
     segtree_t *left, *right;
     ll val;
 
     segtree_t() { }
-
-    segtree_t(int tl, int tr) : val(-INF) {
+    
+    segtree_t(int tl, int tr) : val(0) {    
         if (tl == tr) return;
+
+        int mid = (tl + tr) >> 1;
 
         left = new segtree_t(tl, mid);
         right = new segtree_t(mid + 1, tr); 
@@ -56,10 +57,12 @@ struct segtree_t {
         if (l > r) return;
 
         if (tl == l && tr == r) {
-            maximize(val, x);
+            val += x;
 
             return;
         }
+
+        int mid = (tl + tr) >> 1;
 
         if (r <= mid) 
             left->Update(tl, mid, l, r, x);
@@ -70,21 +73,21 @@ struct segtree_t {
     }
 
     ll Query(int tl, int tr, int l, int r) {
-        if (l > r) return -INF;
+        if (l > r) return 0;
 
         if (tl == l && tr == r) return val;
+
+        int mid = (tl + tr) >> 1;
 
         if (r <= mid)
             return left->Query(tl, mid, l, r);
         else if (l > mid)
             return right->Query(mid + 1, tr, l, r);
         else 
-            return max(left->Query(tl, mid, l, mid), right->Query(mid + 1, tr, mid + 1, r));
+            return left->Query(tl, mid, l, mid) + right->Query(mid + 1, tr, mid + 1, r);
     }
 
     void Pull() {
-        val = max(left->val, right->val);
+        val = left->val + right->val;
     }
-
-#undef mid
 };
