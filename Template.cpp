@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
- 
+
+// #pragma GCC optimize("O3,unroll-loops")
+// #pragma GCC target("avx2,bmi,bmi2,popcnt,lzcnt")
+
 using ll = long long;
 using ull = unsigned long long;
 using pii = pair<int, int>;
@@ -14,10 +17,13 @@ using db = double;
 #define           F   first
 #define           S   second
 #define          pb   push_back
+#define          lb   lower_bound
+#define          ub   upper_bound
 #define       sz(x)   (int)((x).size())
 #define      all(x)   (x).begin(), (x).end()
 #define     rall(x)   (x).rbegin(), (x).rend()
 #define   mem(f, x)   memset(f, x, sizeof(f))
+#define  uniqueV(x)   sort(all(x)), (x).resize(unique(all(x)) - x.begin())
 
 template<class T> bool maximize(T &a, const T &b){ return (a < b ? a = b, 1 : 0); }
 template<class T> bool minimize(T &a, const T &b){ return (a > b ? a = b, 1 : 0); }
@@ -59,9 +65,10 @@ int main() {
 
     int t = 1;
     if (MULTI_TEST) cin >> t;
+
     while (t--)
         solve();
-
+    
     // cerr << setprecision(3) << fixed;
     // cerr << "[" << 1.0 * clock() / CLOCKS_PER_SEC << "s]  ";
 }
@@ -69,5 +76,5 @@ int main() {
 ///--------------------[PROBLEM SOLUTION]--------------------///
 
 void solve() {
-    
-}   
+
+}
