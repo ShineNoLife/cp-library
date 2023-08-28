@@ -29,6 +29,12 @@ public:
         return res;
     }
 
+    ll Query(int l, int r) {
+        if (l > r) return 0;
+
+        return Query(r) - Query(l - 1);
+    }
+
     void Update(int p, ll x) {
         for(; p <= n; p += (p & (-p)))
             bit[p] += x;
