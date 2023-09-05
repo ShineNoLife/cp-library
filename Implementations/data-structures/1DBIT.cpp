@@ -11,7 +11,7 @@ public:
     int n;
     vector<ll> bit;
 
-    BIT1D(int _n){
+    BIT_t (int _n) {
         n = _n;
         bit.assign(n + 1, 0);
     }
