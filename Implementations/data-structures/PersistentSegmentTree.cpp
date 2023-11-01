@@ -1,58 +1,63 @@
-struct SegTree_P{
-    SegTree_P *left = NULL, *right = NULL;
+struct segtree_p_t {
+    segtree_p_t *left = NULL, *right = NULL;
     int val;
-    const bool LAZY_UPDATE = false;
-#define mid ((tl+tr) >> 1)
-    SegTree_P(int tl, int tr) : val(0) {
+
+    segtree_persistent_t(int tl = 0, int tr = 0) : val(0) {
         if(tl == tr)
             return;
-        left = new SegTree_P(tl, mid);
-        right = new SegTree_P(mid+1, tr);
+
+        int mid = (tl + tr) >> 1;
+
+        left = new segtree_p_t(tl, mid);
+        right = new segtree_p_t(mid+1, tr);
     }
  
-    SegTree_P() : val(0) {
-        
-    }
- 
-    SegTree_P* Update(int tl, int tr, int l, int r, int x){
-        if(r < tl || tr < l)
+    segtree_p_t* Update(int tl, int tr, int l, int r, int x) {
+        if (l > r)
             return this;
-        if(l <= tl && tr <= r){
-            SegTree_P *cur = new SegTree_P(*this);
+
+        if (l == tl && tr == r) {
+            segtree_p_t *cur = new segtree_p_t(*this);
             cur->val += x;
+
             return cur;
         }
- 
-        SegTree_P *cur = new SegTree_P(*this);
-        if(LAZY_UPDATE) cur->Push();
-        cur->left = cur->left->Update(tl, mid, l, r, x);
-        cur->right = cur->right->Update(mid+1, tr, l, r, x);
+        
+        segtree_p_t *cur = new segtree_p_t(*this);
+
+        int mid = (tl + tr) >> 1;
+
+        if (r <= mid) {
+            cur->left = cur->left->Update(tl, mid, l, r, x);
+            cur->right = right;
+        }
+        else if (l > mid) {
+            cur->left = left;
+            cur->right = cur->right->Update(mid + 1, tr, l, r, x);
+        }
+
         cur->Pull();
- 
+        
         return cur;
     }
- 
-    int Query(int tl, int tr, int l, int r){
-        if(r < tl || tr < l || l > r)
-            return 0;
-        if(l <= tl && tr <= r)
+    
+    int Query(int tl, int tr, int l, int r) {
+        if (l > r) return 0;
+
+        if (l == tl && tr == r)
             return val;
-        if(LAZY_UPDATE) Push();
-        return left->Query(tl, mid, l, r) + right->Query(mid+1, tr, l, r);
+
+        int mid = (tl + tr) >> 1;
+
+        if (r <= mid)
+            return left->Query(tl, mid, l, r);
+        else if (l > mid)
+            return right->Query(mid + 1, tr, l, r);
+        else 
+            return left->Query(tl, mid, l, mid) + right->Query(mid + 1, tr, mid + 1, r);
     }
- 
-    void Push(){
-        // left = new SegTree_P(*left);
-        // right = new SegTree_P(*right);
-        // left->val += lazy;
-        // right->val += lazy;
-        // left->lazy += lazy;
-        // right->lazy += lazy;
-        // lazy = 0;
-    }
- 
-    void Pull(){
+    
+    void Pull() {
         val = left->val + right->val;
     }
-#undef mid
 };
