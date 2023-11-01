@@ -2,7 +2,7 @@ struct segtree_p_t {
     segtree_p_t *left = NULL, *right = NULL;
     int val;
 
-    segtree_persistent_t(int tl = 0, int tr = 0) : val(0) {
+    segtree_p_t(int tl = 0, int tr = 0) : val(0) {
         if(tl == tr)
             return;
 
