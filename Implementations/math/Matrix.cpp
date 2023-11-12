@@ -2,7 +2,7 @@
 using namespace std;
 
 struct Matrix {
-    int n, m, A[217][217];
+    int n, m, A[256][256];
 
     auto & operator [](int i) {
         return A[i];
@@ -20,11 +20,18 @@ struct Matrix {
 
     Matrix operator *(Matrix B) {
         Matrix C(n, B.m);
+        
+        for(int k = 0; k < m; k++) {
+            for(int i = 0; i < n; i++) {
+                if (!A[i][k]) continue;
+                
+                for(int j = 0; j < B.m; j++) {
+                    if (!B[k][j]) continue;
 
-        for(int i = 0; i < n; i++)
-            for(int j = 0; j < B.m; j++)
-                for(int k = 0; k < m; k++)
                     C[i][j] = (1LL * C[i][j] + 1LL * A[i][k] * B[k][j]) % MOD;
+                }
+            }
+        }
 
         return C;
     }
