@@ -9,10 +9,10 @@ struct Point {
     Point operator - (Point p) const { return Point(x - p.x, y - p.y); }
 };
 
-vector<tuple<ll, ll, ll>> manhattanMST(vector<Point> ps) {
+vector<array<ll, 3>> manhattanMST(vector<Point> ps) {
     vector<int> id(sz(ps));
     iota(all(id), 0);
-    vector<tuple<ll, ll, ll>> edges;
+    vector<array<ll, 3>> edges;
     for (int k = 0; k < 4; k++) {
             sort(all(id), [&](int i, int j) { return (ps[i] - ps[j]).x < (ps[j] - ps[i]).y; });
             map<int, int> sweep;
