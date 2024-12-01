@@ -1,1 +1,1 @@
-# Repository for resources and solutions to problemsets in competitive programming 
+# Repository for Shine's templates in competitive programming 
